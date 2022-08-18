@@ -18,7 +18,7 @@ import {
   ref as storageRef,
 } from "firebase/storage";
 
-const REVIEW_FOLDER_NAME = "reviewHawkerAgain";
+const REVIEW_FOLDER_NAME = "reviewHawker";
 const IMG_FOLDER_NAME = "reviewImages";
 let postingRef = {};
 const hawkerplaces = [
@@ -94,19 +94,16 @@ const ReviewForm = () => {
         for (let i = 0; i < hawkerList.length; i += 1) {
           postingRef = ref(database, `${REVIEW_FOLDER_NAME}/${hawkerList[i]}`);
           const newPostingRef = push(postingRef);
-          console.log(postingRef._path.pieces_[1]);
-          set(newPostingRef, {
-            imageLink: downloadURL,
-            review: review,
-            storeName: storeName,
-            DishName: dishName,
-            valueRating: valueRating,
-            satisfactionRating: satisfactionRating,
-          });
-
-          //there should be an if statement of
-          //if (hawkerId === newTest._path.pieces_[1])
-          //but where should the hawkerId variable go to?
+          if (hawker === postingRef._path.pieces_[1]) {
+            set(newPostingRef, {
+              imageLink: downloadURL,
+              review: review,
+              storeName: storeName,
+              DishName: dishName,
+              valueRating: valueRating,
+              satisfactionRating: satisfactionRating,
+            });
+          }
         }
 
         setReview("");
