@@ -1,13 +1,41 @@
-import React from "react";
-
+import React, { useState } from "react";
+//react-helmet allows you to put plain HTML in our JSX and then outputs it as plain HTML
 import ReviewForm from "./review-form.js";
+import { Helmet } from "react-helmet";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "./styles/theme";
+import { GlobalStyle } from "./styles/globalStyles";
+import Layout from "./components/layouts/Layout";
+import Routing from "./Routes";
 
-const App = () => {
+export const ThemeContext = React.createContext(null);
+
+function App() {
+  const [theme, setTheme] = useState("light");
+  const themeStyle = theme === "light" ? lightTheme : darkTheme;
+
   return (
-    <div>
-      <h1>please check the firebase realtime database for updates</h1>
-      <ReviewForm />
-    </div>
+    <ThemeContext.Provider value={{ setTheme, theme }}>
+      <ThemeProvider theme={themeStyle}>
+        <GlobalStyle />
+        <Helmet>
+          <title>SideMenu Bar</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+            rel="stylesheet"
+          />
+        </Helmet>
+
+        <>
+          <ReviewForm />
+          <Layout>
+            <Routing />
+          </Layout>
+        </>
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 };
 
