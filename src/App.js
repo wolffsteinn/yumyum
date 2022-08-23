@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 //react-helmet allows you to put plain HTML in our JSX and then outputs it as plain HTML
-import ReviewForm from "./review-form.js";
 import { Helmet } from "react-helmet";
 import { ThemeProvider } from "styled-components";
-import { darkTheme, lightTheme } from "./styles/theme";
-import { GlobalStyle } from "./styles/globalStyles";
+import { darkTheme, lightTheme } from "./global-sidebar-styles/theme";
+import { GlobalStyle } from "./global-sidebar-styles/globalStyles";
 import Layout from "./components/layouts/Layout";
 import Routing from "./Routes";
 
@@ -29,7 +28,6 @@ function App() {
         </Helmet>
 
         <>
-          <ReviewForm />
           <Layout>
             <Routing />
           </Layout>
@@ -37,6 +35,6 @@ function App() {
       </ThemeProvider>
     </ThemeContext.Provider>
   );
-};
+}
 
 export default App;
