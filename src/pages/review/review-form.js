@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Avatar,
   Box,
@@ -16,13 +16,14 @@ import {
   StyledPaper,
   StyledTextField,
 } from "./styles-review";
-import { database, storage } from "../firebase";
+import { database, storage } from "../../firebase";
 import { ref, push, set } from "firebase/database";
 import {
   getDownloadURL,
   uploadBytes,
   ref as storageRef,
 } from "firebase/storage";
+import { ThemeContext } from "../../App";
 
 const REVIEW_FOLDER_NAME = "review";
 const IMG_FOLDER_NAME = "reviewImages";
@@ -38,8 +39,9 @@ const ReviewForm = () => {
   const [storeName, setStoreName] = useState("");
   const [dishName, setDishName] = useState("");
   const [review, setReview] = useState("");
+  const { setTheme, theme } = useContext(ThemeContext);
 
-  var jsonData = require("../hawker-centres-kml.json");
+  var jsonData = require("../../hawker-centres-kml.json");
 
   hawkerList = jsonData.map((hawkers) => {
     const names = hawkers.Name;

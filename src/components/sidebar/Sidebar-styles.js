@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { buttonReset, view } from "../../styles/variables";
+import { buttonReset, view } from "../../global-sidebar-styles/variables";
 import { Link } from "react-router-dom";
 
 export const StyledSidebar = styled.div`
@@ -15,7 +15,7 @@ export const StyledSideBarButton = styled.button`
   ${buttonReset}
   position: absolute;
   top: ${view.xxlSpacing};
-  right: ${({ isOpen }) => (isOpen ? "-16px" : "-40px")};
+  right: ${({ isOpen }) => (isOpen ? "-16px" : "-20px")};
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -29,49 +29,12 @@ export const StyledSideBarButton = styled.button`
   transform: ${({ isOpen }) => (!isOpen ? `rotate(180deg)` : `initial`)};
 `;
 
-export const StyledLogo = styled.div`
-  width: 52px;
+export const StyledPerson = styled.div`
+  width: 100%;
   cursor: pointer;
+  padding-left: ${view.smSpacing};
   margin-bottom: ${view.lgSpacing};
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-`;
-
-export const StyledSearch = styled.div`
-  background: ${({ theme }) => theme.backgroundAlpha};
-  border: 2px solid ${({ theme }) => theme.background3};
-  border-radius: ${view.borderRadius};
-
-  input {
-    padding: 0 ${view.smSpacing};
-    height: 48px;
-    font-family: inherit;
-    letter-spacing: inherit;
-    font-size: 16px;
-    width: 100%;
-    outline: none;
-    border: none;
-    color: inherit;
-    background: transparent;
-  }
-
   display: flex;
-`;
-
-export const StyledSearchIcon = styled.button`
-  ${buttonReset};
-  padding: calc(${view.mdSpacing} -2px) ${view.mdSpacing};
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-
-  svg {
-    font-size: 25px;
-    padding: 2px;
-  }
 `;
 
 export const StyledSidebarDivider = styled.div`

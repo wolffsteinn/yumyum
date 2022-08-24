@@ -1,14 +1,12 @@
-import React, { useContext, useState, useRef } from "react";
-import { logoSVG } from "../../icons";
+import React, { useContext, useState } from "react";
+
 import {
   StyledLink,
   StyledLinkContainer,
   StyledLinkIcon,
   StyledLinkLabel,
   StyledLinkNotif,
-  StyledLogo,
-  StyledSearch,
-  StyledSearchIcon,
+  StyledPerson,
   StyledSidebar,
   StyledSideBarButton,
   StyledSidebarDivider,
@@ -17,31 +15,15 @@ import {
   StyledThemeToggler,
   StyledToggleThumb,
 } from "./Sidebar-styles";
-import {
-  AiOutlineApartment,
-  AiOutlineHome,
-  AiOutlineSearch,
-  AiOutlineSetting,
-  AiOutlineLeft,
-} from "react-icons/ai";
+import { AiOutlineHome, AiOutlineSetting, AiOutlineLeft } from "react-icons/ai";
 import { MdLogout, MdOutlineAnalytics } from "react-icons/md";
 import { BsPeople } from "react-icons/bs";
 import { ThemeContext } from "../../App";
+import PersonIcon from "@mui/icons-material/Person";
 
 const Sidebar = () => {
-  const searchRef = useRef(null);
   const { setTheme, theme } = useContext(ThemeContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const searchClickHandler = () => {
-    if (!sidebarOpen) {
-      setSidebarOpen(true);
-      //focus on input
-      searchRef.current.focus();
-    } else {
-      // search functionality
-    }
-  };
 
   return (
     <StyledSidebar isOpen={sidebarOpen}>
@@ -53,22 +35,15 @@ const Sidebar = () => {
           <AiOutlineLeft />
         </StyledSideBarButton>
       </>
-      <StyledLogo>
-        <img src={logoSVG} alt="logo" />
-      </StyledLogo>
-      <StyledSearch
-        onClick={searchClickHandler}
-        style={!sidebarOpen ? { width: `fit-content` } : {}}
-      >
-        <input
-          ref={searchRef}
-          placeholder="Search"
-          style={!sidebarOpen ? { width: 0, padding: 0 } : {}}
-        />
-        <StyledSearchIcon>
-          <AiOutlineSearch />
-        </StyledSearchIcon>
-      </StyledSearch>
+      <StyledPerson>
+        <PersonIcon fontSize="large" />
+        {sidebarOpen && (
+          <>
+            <StyledLinkLabel>Person Username Here</StyledLinkLabel>
+          </>
+        )}
+      </StyledPerson>
+
       <StyledSidebarDivider />
       {linksArray.map(({ icon, label, notif, to }) => (
         <StyledLinkContainer key={label}>
@@ -115,7 +90,7 @@ const Sidebar = () => {
 };
 const linksArray = [
   {
-    label: "Explore",
+    label: "Home",
     icon: <AiOutlineHome />,
     to: "/",
     notif: 0,

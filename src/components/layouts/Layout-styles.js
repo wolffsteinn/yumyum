@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { view } from "../../styles/variables";
+import { view } from "../../global-sidebar-styles/variables";
 
 export const StylesLayout = styled.div`
   display: flex;
