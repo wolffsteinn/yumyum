@@ -16,14 +16,19 @@ import {
   StyledToggleThumb,
 } from "./Sidebar-styles";
 import { AiOutlineHome, AiOutlineSetting, AiOutlineLeft } from "react-icons/ai";
-import { MdLogout, MdOutlineAnalytics } from "react-icons/md";
-import { BsPeople } from "react-icons/bs";
+import { MdLogout, MdOutlineRateReview } from "react-icons/md";
+import { BiMapAlt } from "react-icons/bi";
+import { RiRestaurantLine } from "react-icons/ri";
 import { ThemeContext } from "../../App";
+import { useAuth } from "../../Context/Context";
 import PersonIcon from "@mui/icons-material/Person";
 
 const Sidebar = () => {
   const { setTheme, theme } = useContext(ThemeContext);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const { currentUser } = useAuth();
+
+  console.log(sidebarOpen);
 
   return (
     <StyledSidebar isOpen={sidebarOpen}>
@@ -39,7 +44,7 @@ const Sidebar = () => {
         <PersonIcon fontSize="large" />
         {sidebarOpen && (
           <>
-            <StyledLinkLabel>Person Username Here</StyledLinkLabel>
+            <StyledLinkLabel>Welcome, {currentUser.email}</StyledLinkLabel>
           </>
         )}
       </StyledPerson>
@@ -64,10 +69,10 @@ const Sidebar = () => {
         </StyledLinkContainer>
       ))}
       <StyledSidebarDivider />
-      {linksSecondaryArray.map(({ icon, label }) => (
+      {linksSecondaryArray.map(({ icon, label, to }) => (
         <StyledLinkContainer key={label}>
           <StyledLink
-            to="/"
+            to={to}
             style={!sidebarOpen ? { width: `fit-content` } : {}}
           >
             <StyledLinkIcon>{icon}</StyledLinkIcon>
@@ -92,19 +97,25 @@ const linksArray = [
   {
     label: "Home",
     icon: <AiOutlineHome />,
-    to: "/",
+    to: "/dashboard",
     notif: 0,
   },
   {
-    label: "Posts",
-    icon: <MdOutlineAnalytics />,
-    to: "/posts",
+    label: "Map View",
+    icon: <BiMapAlt />,
+    to: "/mapView",
     notif: 1,
   },
   {
-    label: "Account",
-    icon: <BsPeople />,
-    to: "/account",
+    label: "HawkerList",
+    icon: <RiRestaurantLine />,
+    to: "/hawkerList",
+    notif: 5,
+  },
+  {
+    label: "Post a Review!",
+    icon: <MdOutlineRateReview />,
+    to: "/postReview",
     notif: 5,
   },
 ];
@@ -113,10 +124,12 @@ const linksSecondaryArray = [
   {
     label: "Settings",
     icon: <AiOutlineSetting />,
+    to: "/settings",
   },
   {
     label: "Logout",
     icon: <MdLogout />,
+    to: "/",
   },
 ];
 
