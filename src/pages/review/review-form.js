@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Avatar,
   Box,
@@ -16,7 +16,7 @@ import {
   StyledPaper,
   StyledTextField,
 } from "./styles-review";
-import { database, storage } from "../../firebase";
+import { database, storage } from "../../Firebase";
 import { ref, push, set } from "firebase/database";
 import {
   getDownloadURL,
@@ -24,6 +24,7 @@ import {
   ref as storageRef,
 } from "firebase/storage";
 import { ThemeContext } from "../../App";
+import Layout from "../../components/layouts/Layout";
 
 const REVIEW_FOLDER_NAME = "review";
 const IMG_FOLDER_NAME = "reviewImages";
@@ -39,7 +40,6 @@ const ReviewForm = () => {
   const [storeName, setStoreName] = useState("");
   const [dishName, setDishName] = useState("");
   const [review, setReview] = useState("");
-  const { setTheme, theme } = useContext(ThemeContext);
 
   var jsonData = require("../../hawker-centres-kml.json");
 
@@ -118,81 +118,85 @@ const ReviewForm = () => {
   };
 
   return (
-    <Grid>
-      <StyledPaper elevation={10}>
-        <Grid align="center">
-          <Avatar sx={{ bgcolor: pink[50] }}>
-            <FaceIcon color="secondary" fontSize="large" />
-          </Avatar>
-          <h1>Give your honest review!</h1>
+    <Grid container>
+      <Layout>
+        <Grid>
+          <StyledPaper elevation={10}>
+            <Grid align="center">
+              <Avatar sx={{ bgcolor: pink[50] }}>
+                <FaceIcon color="secondary" fontSize="large" />
+              </Avatar>
+              <h1>Give your honest review!</h1>
+            </Grid>
+            <form onSubmit={handleSubmit}>
+              <StyledAutocomplete
+                disablePortal
+                options={hawkerList}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Hawker"
+                    placeholder="hawker center name"
+                  />
+                )}
+                isOptionEqualToValue={(option, value) => option === value}
+                onChange={(e, newValue) => setHawker(newValue)}
+                value={hawker}
+              />
+              <StyledTextField
+                fullWidth
+                label="Store Name"
+                value={storeName}
+                placeholder="Be as accurate as possible!"
+                onChange={handleStoreNameChange}
+              />
+              <StyledTextField
+                fullWidth
+                label="Dish Name"
+                value={dishName}
+                placeholder="Be as detailed as possible!"
+                onChange={handleDishNameChange}
+              />
+              <StyledTextField
+                fullWidth
+                type="file"
+                value={fileInputValue}
+                onChange={handleFileInputChange}
+              />
+              <StyledTextField
+                fullWidth
+                label="Review"
+                value={review}
+                multiline
+                rows={4}
+                placeholder="Your honest review here!"
+                onChange={handleReviewChange}
+              />
+              <Box>
+                <Stack spacing={1}>
+                  <Typography variant="subtitle2">Value-for-money</Typography>
+                  <Rating
+                    name="half-rating"
+                    value={Number(valueRating)}
+                    precision={0.5}
+                    onChange={handleValueRatingChange}
+                  />
+                  <Typography variant="subtitle2">Satisfaction</Typography>
+                  <Rating
+                    name="half-rating"
+                    value={Number(satisfactionRating)}
+                    precision={0.5}
+                    onChange={handleSatisfactionRatingChange}
+                  />
+                </Stack>
+              </Box>
+              <StyledButton type="submit" variant="contained" color="secondary">
+                Submit
+              </StyledButton>
+            </form>
+          </StyledPaper>
         </Grid>
-        <form onSubmit={handleSubmit}>
-          <StyledAutocomplete
-            disablePortal
-            options={hawkerList}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Hawker"
-                placeholder="hawker center name"
-              />
-            )}
-            isOptionEqualToValue={(option, value) => option === value}
-            onChange={(e, newValue) => setHawker(newValue)}
-            value={hawker}
-          />
-          <StyledTextField
-            fullWidth
-            label="Store Name"
-            value={storeName}
-            placeholder="Be as accurate as possible!"
-            onChange={handleStoreNameChange}
-          />
-          <StyledTextField
-            fullWidth
-            label="Dish Name"
-            value={dishName}
-            placeholder="Be as detailed as possible!"
-            onChange={handleDishNameChange}
-          />
-          <StyledTextField
-            fullWidth
-            type="file"
-            value={fileInputValue}
-            onChange={handleFileInputChange}
-          />
-          <StyledTextField
-            fullWidth
-            label="Review"
-            value={review}
-            multiline
-            rows={4}
-            placeholder="Your honest review here!"
-            onChange={handleReviewChange}
-          />
-          <Box>
-            <Stack spacing={1}>
-              <Typography variant="subtitle2">Value-for-money</Typography>
-              <Rating
-                name="half-rating"
-                value={Number(valueRating)}
-                precision={0.5}
-                onChange={handleValueRatingChange}
-              />
-              <Typography variant="subtitle2">Satisfaction</Typography>
-              <Rating
-                name="half-rating"
-                value={Number(satisfactionRating)}
-                precision={0.5}
-                onChange={handleSatisfactionRatingChange}
-              />
-            </Stack>
-          </Box>
-          <StyledButton type="submit" variant="contained" color="secondary">
-            Submit
-          </StyledButton>
-        </form>
-      </StyledPaper>
+      </Layout>
     </Grid>
   );
 };

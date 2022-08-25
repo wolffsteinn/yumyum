@@ -1,8 +1,8 @@
 import SignUp from "./LoginSignup/Signup";
 import Login from "./LoginSignup/Login";
 import { AuthProvider } from "./Context/Context";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./Dashboard";
+import { Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
 
 import React, { useState } from "react";
 //react-helmet allows you to put plain HTML in our JSX and then outputs it as plain HTML
@@ -10,8 +10,9 @@ import { Helmet } from "react-helmet";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./global-sidebar-styles/theme";
 import { GlobalStyle } from "./global-sidebar-styles/globalStyles";
-import Layout from "./components/layouts/Layout";
-import Routing from "./Routes";
+import ReviewForm from "./pages/review/review-form";
+import MapView from "./pages/mapView";
+import HawkerList from "./pages/hawkerList";
 
 export const ThemeContext = React.createContext(null);
 
@@ -33,21 +34,16 @@ function App() {
           />
         </Helmet>
 
-        <BrowserRouter>
-          <AuthProvider>
-            <Routes>
-              <Route exact path="/" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Routes>
-          </AuthProvider>
-        </BrowserRouter>
-
-        <>
-          <Layout>
-            <Routing />
-          </Layout>
-        </>
+        <AuthProvider>
+          <Routes>
+            <Route exact path="/" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/dashboard/*" element={<Dashboard />} />
+            <Route path="/mapView/*" element={<MapView />} />
+            <Route path="/hawkerList/*" element={<HawkerList />} />
+            <Route path="/postReview/*" element={<ReviewForm />} />
+          </Routes>
+        </AuthProvider>
       </ThemeProvider>
     </ThemeContext.Provider>
   );
