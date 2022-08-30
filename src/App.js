@@ -1,3 +1,4 @@
+
 import SignUp from "./LoginSignup/Signup";
 import Login from "./LoginSignup/Login";
 import { AuthProvider } from "./Context/Context";
@@ -13,8 +14,10 @@ import { GlobalStyle } from "./global-sidebar-styles/globalStyles";
 import ReviewForm from "./pages/review/review-form";
 import MapView from "./pages/mapView";
 import HawkerList from "./pages/hawkerList";
+import List from "./List/list";
 
 export const ThemeContext = React.createContext(null);
+
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -40,12 +43,13 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/dashboard/*" element={<Dashboard />} />
             <Route path="/mapView/*" element={<MapView />} />
-            <Route path="/hawkerList/*" element={<HawkerList />} />
+            <Route path="/hawkerList/*" element={<List />} />
             <Route path="/postReview/*" element={<ReviewForm />} />
           </Routes>
         </AuthProvider>
       </ThemeProvider>
     </ThemeContext.Provider>
+
   );
 }
 
