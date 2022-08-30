@@ -77,7 +77,7 @@ const SignUp = () => {
           </form>
 
           <Typography variant="subtitle1">
-            Already have an account? <Link to="/login"> Log in </Link>
+            Already have an account? <Link to="/"> Log in </Link>
           </Typography>
         </Grid>
       </StyledPaper>

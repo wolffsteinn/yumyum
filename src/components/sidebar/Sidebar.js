@@ -110,13 +110,13 @@ const linksArray = [
     label: "HawkerList",
     icon: <RiRestaurantLine />,
     to: "/hawkerList",
-    notif: 5,
+    notif: 0,
   },
   {
     label: "Post a Review!",
     icon: <MdOutlineRateReview />,
     to: "/postReview",
-    notif: 5,
+    notif: 0,
   },
 ];
 
@@ -129,7 +129,7 @@ const linksSecondaryArray = [
   {
     label: "Logout",
     icon: <MdLogout />,
-    to: "/",
+    to: "/logout",
   },
 ];
 
