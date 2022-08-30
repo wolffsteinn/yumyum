@@ -2,29 +2,27 @@ import React, { useState, useRef } from "react";
 import { StyledPaper } from "./Styles";
 import { Alert, Button, Grid, TextField, Typography } from "@mui/material";
 import { useAuth } from "../Context/Context";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Login = () => {
-  const { login } = useAuth();
+const ResetPassword = () => {
+  const { passwordReset } = useAuth();
   const emailRef = useRef();
-  const passwordRef = useRef();
 
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  let navigate = useNavigate();
 
   const handleSignUpSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setMessage("");
       setError("");
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      //after logging in, move to the dashboard
-      navigate("/dashboard", { replace: true });
+      await passwordReset(emailRef.current.value);
+      setMessage("Check Inbox for further instructions");
     } catch {
-      setError("Failed to create login");
+      setError("Failed to reset password");
     }
 
     setLoading(false);
@@ -34,22 +32,16 @@ const Login = () => {
     <Grid>
       <StyledPaper elevation={10}>
         <Grid align="center">
-          <Typography variant="h3">Log In here</Typography>
+          <Typography variant="h3">Reset Password</Typography>
         </Grid>
 
         {error && <Alert severity="error">{error}</Alert>}
+        {!error && message && <Alert severity="success">{message}</Alert>}
 
         <Grid>
           <form onSubmit={handleSignUpSubmit}>
             <Typography variant="subtitle1">Email</Typography>
             <TextField fullWidth type="email" inputRef={emailRef} />
-            <Typography variant="subtitle1">Password</Typography>
-            <TextField
-              fullWidth
-              type="password"
-              inputRef={passwordRef}
-              autoComplete="on"
-            />
 
             <Button
               disabled={loading}
@@ -57,24 +49,22 @@ const Login = () => {
               variant="contained"
               color={{ loading } ? "primary" : "secondary"}
             >
-              Log In
+              Reset Password
             </Button>
           </form>
 
-          <Grid display="flex">
-            <Typography variant="subtitle1">
-              No existing account? <br></br>{" "}
-              <Link to="/signup"> Create Account Now </Link>
-            </Typography>
-            <Typography variant="subtitle1">
-              Forgot Password? <br></br>{" "}
-              <Link to="/forgot-pw"> Reset Password </Link>
-            </Typography>
-          </Grid>
+          <Typography variant="subtitle1">
+            <br></br> <Link to="/"> Log In </Link>
+          </Typography>
+
+          <Typography variant="subtitle1">
+            No existing account? <br></br>{" "}
+            <Link to="/signup"> Create Account Now </Link>
+          </Typography>
         </Grid>
       </StyledPaper>
     </Grid>
   );
 };
 
-export default Login;
+export default ResetPassword;

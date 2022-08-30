@@ -1,26 +1,16 @@
-
-import SignUp from "./LoginSignup/Signup";
-import Login from "./LoginSignup/Login";
-import { AuthProvider } from "./Context/Context";
-import { Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-
 import React, { useState } from "react";
-//react-helmet allows you to put plain HTML in our JSX and then outputs it as plain HTML
+import { AuthProvider } from "./Context/Context";
 import { Helmet } from "react-helmet";
 import { ThemeProvider } from "styled-components";
 import { darkTheme, lightTheme } from "./global-sidebar-styles/theme";
 import { GlobalStyle } from "./global-sidebar-styles/globalStyles";
-import ReviewForm from "./pages/review/review-form";
-import MapView from "./pages/mapView";
-import HawkerList from "./pages/hawkerList";
-import List from "./List/list";
+import Routing from "./Routes";
 
 export const ThemeContext = React.createContext(null);
 
-
-function App() {
+const App = () => {
   const [theme, setTheme] = useState("light");
+
   const themeStyle = theme === "light" ? lightTheme : darkTheme;
 
   return (
@@ -28,7 +18,7 @@ function App() {
       <ThemeProvider theme={themeStyle}>
         <GlobalStyle />
         <Helmet>
-          <title>SideMenu Bar</title>
+          <title>YumYum</title>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
           <link
@@ -36,21 +26,12 @@ function App() {
             rel="stylesheet"
           />
         </Helmet>
-
         <AuthProvider>
-          <Routes>
-            <Route exact path="/" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/dashboard/*" element={<Dashboard />} />
-            <Route path="/mapView/*" element={<MapView />} />
-            <Route path="/hawkerList/*" element={<List />} />
-            <Route path="/postReview/*" element={<ReviewForm />} />
-          </Routes>
+          <Routing />
         </AuthProvider>
       </ThemeProvider>
     </ThemeContext.Provider>
-
   );
-}
+};
 
 export default App;

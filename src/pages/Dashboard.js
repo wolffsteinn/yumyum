@@ -1,43 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
+
 import { useAuth } from "../Context/Context";
-import { Alert, Button, Grid, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import Layout from "../components/layouts/Layout";
+import { Grid, Typography } from "@mui/material";
 
 function Dashboard() {
-  const { currentUser, logout } = useAuth();
-  const [error, setError] = useState("");
-
-  let navigate = useNavigate();
-
-  const handleLogout = async () => {
-    setError("");
-
-    try {
-      await logout();
-      navigate("/", { replace: true });
-    } catch {
-      setError("Failed to logout");
-    }
-  };
+  const { currentUser } = useAuth();
 
   return (
     <Grid container>
-      <Layout>
+      <Grid>
         <Grid>
-          <Grid>
-            <Typography variant="subtitle1"> Dashboard</Typography>
-            {error && <Alert severity="error">{error}</Alert>}
-            <Typography variant="subtitle1">
-              {" "}
-              Email: {currentUser.email}
-            </Typography>
-          </Grid>
-          <Button variant="contained" color="secondary" onClick={handleLogout}>
-            Log Out
-          </Button>
+          <Typography variant="subtitle1"> Dashboard</Typography>
+          <Typography variant="subtitle1">
+            {" "}
+            Email: {currentUser.email}
+          </Typography>
         </Grid>
-      </Layout>
+      </Grid>
     </Grid>
   );
 }
