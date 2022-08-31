@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import ReviewForm from "./pages/reviewForm/review-form";
 import MapView from "./pages/map/mapView";
-import List from "./pages/hawkerList";
 import SignUp from "./LoginSignup/Signup";
 import Login from "./LoginSignup/Login";
 import Dashboard from "./pages/Dashboard";
@@ -37,17 +36,6 @@ const Routing = () => {
           <PrivateRoute>
             <Layout>
               <MapView />
-            </Layout>
-          </PrivateRoute>
-        }
-      />
-      <Route
-        exact
-        path="/hawkerList"
-        element={
-          <PrivateRoute>
-            <Layout>
-              <List />
             </Layout>
           </PrivateRoute>
         }
