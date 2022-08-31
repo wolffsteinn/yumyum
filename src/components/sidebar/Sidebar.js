@@ -18,7 +18,6 @@ import {
 import { AiOutlineHome, AiOutlineSetting, AiOutlineLeft } from "react-icons/ai";
 import { MdLogout, MdOutlineRateReview } from "react-icons/md";
 import { BiMapAlt } from "react-icons/bi";
-import { RiRestaurantLine } from "react-icons/ri";
 import { ThemeContext } from "../../App";
 import { useAuth } from "../../Context/Context";
 import PersonIcon from "@mui/icons-material/Person";
@@ -27,8 +26,6 @@ const Sidebar = () => {
   const { setTheme, theme } = useContext(ThemeContext);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const { currentUser } = useAuth();
-
-  console.log(sidebarOpen);
 
   return (
     <StyledSidebar isOpen={sidebarOpen}>
