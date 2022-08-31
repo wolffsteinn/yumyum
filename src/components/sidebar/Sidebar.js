@@ -107,12 +107,6 @@ const linksArray = [
     notif: 1,
   },
   {
-    label: "HawkerList",
-    icon: <RiRestaurantLine />,
-    to: "/hawkerList",
-    notif: 0,
-  },
-  {
     label: "Post a Review!",
     icon: <MdOutlineRateReview />,
     to: "/postReview",
