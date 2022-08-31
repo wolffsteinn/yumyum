@@ -116,7 +116,7 @@ const linksArray = [
 
 const linksSecondaryArray = [
   {
-    label: "Settings",
+    label: "Reset Password",
     icon: <AiOutlineSetting />,
     to: "/settings",
   },

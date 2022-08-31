@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import axios from "axios";
-import HawkerDetails from "../PlaceDetails/hawker-details";
+import HawkerDetails from "../../PlaceDetails/hawker-details";
 
 import { Autocomplete, TextField } from "@mui/material";
 let hawkerNames = [];
@@ -55,7 +55,7 @@ const List = () => {
       </Grid> */}
 
       <Grid>
-        {hawkerDetails?.map((details, i) => {
+        {hawkerDetails((details, i) => {
           return hawkerName === details.name ? (
             <Grid key={i}>
               <HawkerDetails details={details} />

@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
+// import { RemoveScroll } from "react-remove-scroll";
 import ReviewForm from "./pages/reviewForm/review-form";
 import MapView from "./pages/map/mapView";
 import SignUp from "./LoginSignup/Signup";
@@ -9,14 +10,36 @@ import PrivateRoute from "./PrivateRoute";
 import Layout from "./components/layouts/Layout";
 import ResetPassword from "./LoginSignup/forgotPassword";
 import Logout from "./LoginSignup/logout";
+import ResetProfile from "./LoginSignup/resetAuth";
 
 const Routing = () => {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/logout" element={<Logout />} />
       <Route path="/forgot-pw" element={<ResetPassword />} />
+      <Route
+        exact
+        path="/logout"
+        element={
+          <PrivateRoute>
+            <Layout>
+              <Logout />
+            </Layout>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        exact
+        path="/settings"
+        element={
+          <PrivateRoute>
+            <Layout>
+              <ResetProfile />
+            </Layout>
+          </PrivateRoute>
+        }
+      />
 
       <Route
         exact
