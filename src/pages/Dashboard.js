@@ -42,26 +42,13 @@ const List = () => {
         onChange={(e, newValue) => setHawkerName(newValue)}
         value={hawkerName}
       />
-      {/* <Grid>
-        {hawkerDetails?.map((details, i) => {
-          return hawkerName === details.name ? (
-            <Grid key={i}>
-              <HawkerDetails details={details} />
-            </Grid>
-          ) : (
-            <h1> No such hawker</h1>
-          );
-        })}
-      </Grid> */}
 
       <Grid>
         {hawkerDetails?.map((details, i) => {
           return hawkerName === details.name ? (
-            <Grid key={i}>
-              <HawkerDetails details={details} />
-            </Grid>
+            <HawkerDetails details={details} />
           ) : (
-            <h1> No such hawker</h1>
+            <></>
           );
         })}
       </Grid>
