@@ -98,6 +98,12 @@ const linksArray = [
     notif: 0,
   },
   {
+    label: "Posts",
+    icon: <AiOutlineHome />,
+    to: "/posts",
+    notif: 0,
+  },
+  {
     label: "Map View",
     icon: <BiMapAlt />,
     to: "/mapView",

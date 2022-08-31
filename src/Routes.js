@@ -11,6 +11,7 @@ import Layout from "./components/layouts/Layout";
 import ResetPassword from "./LoginSignup/forgotPassword";
 import Logout from "./LoginSignup/logout";
 import ResetProfile from "./LoginSignup/resetAuth";
+import Posts from "./pages/Posts";
 
 const Routing = () => {
   return (
@@ -36,6 +37,18 @@ const Routing = () => {
           <PrivateRoute>
             <Layout>
               <ResetProfile />
+            </Layout>
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        exact
+        path="/posts"
+        element={
+          <PrivateRoute>
+            <Layout>
+              <Posts />
             </Layout>
           </PrivateRoute>
         }
