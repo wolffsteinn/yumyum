@@ -21,7 +21,6 @@ const Login = () => {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      //after logging in, move to the dashboard
       navigate("/dashboard", { replace: true });
     } catch {
       setError("Failed to create login");
@@ -61,7 +60,7 @@ const Login = () => {
             </Button>
           </form>
 
-          <Grid display="flex">
+          <Grid display="flex" justifyContent="space-around">
             <Typography variant="subtitle1">
               No existing account? <br></br>{" "}
               <Link to="/signup"> Create Account Now </Link>
