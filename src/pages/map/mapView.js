@@ -25,6 +25,9 @@ import compass from "./compass.svg";
 
 import { NavLink } from "react-router-dom";
 
+let hawkerStringNoSpace;
+let hawkerStringNoSpace2;
+
 const heart =
   "https://www.freeiconspng.com/thumbs/heart-icon/heart-icon-14.png";
 
@@ -60,6 +63,13 @@ export default function Map() {
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
   }, []);
+
+  if (selected != null) {
+    // const hawkerString = JSON.stringify(selected.ADDRESSPOSTALCODE);
+    // hawkerStringNoSpace = hawkerString.replace(/\s+"/g, "");
+    // hawkerStringNoSpace2 = hawkerStringNoSpace.replaceAll('^"|"$', "");
+    // console.log(hawkerString);
+  }
 
   if (loadError) return "Error loading map";
   if (!isLoaded) return "Loading Maps";
@@ -110,7 +120,7 @@ export default function Map() {
           >
             <div>
               <h2>{selected.Name}</h2>
-              <NavLink to="/posts" exact>
+              <NavLink to={`/posts/${selected.ADDRESSPOSTALCODE}`} exact>
                 View Reviews
               </NavLink>
             </div>

@@ -29,7 +29,8 @@ const Posts = () => {
         items = Object.values(childData);
       });
     });
-  }, [childData]);
+    console.log(reviewRef);
+  }, [childKey]);
 
   return (
     <>

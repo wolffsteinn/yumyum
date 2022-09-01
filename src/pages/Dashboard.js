@@ -10,7 +10,7 @@ const List = () => {
   const [hawkerDetails, setHawkerDetails] = useState([]);
   const [hawkerName, setHawkerName] = useState([]);
 
-  console.log({ hawkerName });
+  console.log({ hawkerName, hawkerDetails });
 
   useEffect(() => {
     axios

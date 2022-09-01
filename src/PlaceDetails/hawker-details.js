@@ -9,6 +9,7 @@ import {
   Button,
 } from "@mui/material";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const HawkerDetails = ({ details }) => {
   return (
@@ -57,7 +58,9 @@ const HawkerDetails = ({ details }) => {
 
       <CardActions>
         <Button variant="outlined" size="small">
-          Click for reviews
+          <NavLink to={`/posts/${details.name}`} exact>
+            View Reviews
+          </NavLink>
         </Button>
       </CardActions>
     </Card>
