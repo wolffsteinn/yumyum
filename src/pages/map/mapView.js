@@ -16,15 +16,13 @@ import {
   ComboboxList,
   ComboboxOption,
 } from "@reach/combobox";
-import { formatRelative } from "date-fns";
+
 import "@reach/combobox/styles.css";
 import mapStyles from "./mapStyles.js";
 import "./otherStyles.css";
 import hawkerData from "../../hawker-centres-kml.json";
-// import hawkerDataKML from "./hawker-centres-kml.kml";
-// import heart from "./heart.svg";
 import compass from "./compass.svg";
-import ReviewFeed from "../../pages/Posts";
+
 import { NavLink } from "react-router-dom";
 
 const heart =
@@ -51,20 +49,7 @@ export default function Map() {
     libraries,
   });
 
-  const [markers, setMarkers] = React.useState([]);
   const [selected, setSelected] = React.useState(null);
-
-  // const onMapClick = React.useCallback((event) => {
-  //   setMarkers((current) => [
-  //     ...current,
-  //     {
-  //       lat: event.latLng.lat(),
-  //       lng: event.latLng.lng(),
-  //       time: new Date(),
-  //     },
-  //   ]);
-  //   console.log(markers);
-  // }, []);
 
   const panTo = React.useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
@@ -79,33 +64,8 @@ export default function Map() {
   if (loadError) return "Error loading map";
   if (!isLoaded) return "Loading Maps";
 
-  // GoogleMap.data.loadGeoJson(hawkerData);
-  // console.log(hawkerData.features);
-
-  // var data = fetch({ hawkerData }).then(function (data) {
-  //   console.log(data);
-  // });
-
-  // const autoCenterMap = ({ google }, map) => {
-  //   this.loadGeoJson(map);
-  // };
-
-  // const loadGeoJson = async (map) => {
-  //   const geojsonRoutes = await this.getRoutes(feed_code);
-  //   const geojsonEnvelope = await this.getEnvelope(feed_code);
-  //   map.data.addGeoJson(geojsonEnvelope);
-  //   map.data.addGeoJson(geojsonRoutes); // # load geojson layer
-  // };
-
   return (
     <div>
-      {/* <h1>
-        Must Eat{" "}
-        <span role="img" aria-label="candy">
-          🍬
-        </span>
-      </h1> */}
-
       <Search panTo={panTo} />
       <Locate panTo={panTo} />
 
@@ -114,7 +74,6 @@ export default function Map() {
         zoom={12}
         center={center}
         options={options}
-        // onClick={onMapClick}
         onLoad={onMapLoad}
       >
         {hawkerData.map((item) => {
@@ -149,67 +108,14 @@ export default function Map() {
               lng: selected.X,
             }}
           >
-            {/* console.log(selected) */}
             <div>
               <h2>{selected.Name}</h2>
-              <NavLink
-                // className="navbar-item"
-                // activeClassName="is-active"
-                to="/posts"
-                exact
-              >
+              <NavLink to="/posts" exact>
                 View Reviews
               </NavLink>
-              {/* <p>Added {formatRelative(selected.time, new Date())}</p> */}
             </div>
           </InfoWindow>
         ) : null}
-        {/* {selected ? (
-          <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div>
-              <h2>Nice Food</h2>
-              <p>Added {formatRelative(selected.time, new Date())}</p>
-            </div>
-          </InfoWindow>
-        ) : null} */}
-
-        {/* //Do something with this layer or if not manually plot out*/}
-        {/* <KmlLayer src={hawkerDataKML} /> */}
-        {/* //Attempt at trying to extract out the coordinates for each hawker
-        center //from the data.gov.sg geojson file */}
-        {/* {hawkerData.features.map((hawkerData) => (
-          <Marker
-            key={hawkerData.features.properties.Name}
-            position={{
-              lat: hawkerData.features.geometry.coordinates[1],
-              lng: hawkerData.features.geometry.coordinates[0],
-            }}
-            icon={{
-              icon: { heart },
-            }}
-          />
-        ))}{" "}
-        // */}
-        {/* {markers.map((marker) => (
-          <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            icon={{
-              url: heart,
-              scaledSize: new window.google.maps.Size(30, 30),
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-            }}
-            onClick={() => {
-              setSelected(marker);
-            }}
-          />
-        ))} */}
       </GoogleMap>
     </div>
   );
