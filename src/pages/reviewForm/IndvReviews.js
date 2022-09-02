@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { database } from "../../src/Firebase";
+import { database } from "../../Firebase";
 import { useEffect } from "react";
 import {
   Typography,
@@ -11,30 +11,30 @@ import {
   CardContent,
   Divider,
 } from "@mui/material";
-import { onValue, ref as databaseRef } from "firebase/database";
+import { onChildAdded, ref as databaseRef } from "firebase/database";
 const REVIEW_FOLDER_NAME = "review";
-let items = [];
+let hawkerInfo = [];
 
-const Posts = () => {
+const IndividualReviews = ({ hawkerDetails }) => {
   const [childKey, setChildKey] = useState("");
   const [childData, setChildData] = useState("");
 
   useEffect(() => {
     const reviewRef = databaseRef(database, REVIEW_FOLDER_NAME);
 
-    onValue(reviewRef, (snapshot) => {
-      snapshot.forEach((child) => {
-        setChildKey(child.key);
-        setChildData(child.val());
-        items = Object.values(childData);
-      });
+    onChildAdded(reviewRef, (data) => {
+      if (data.key === hawkerDetails.Name) {
+        setChildKey(data.key);
+        setChildData(data.val());
+        hawkerInfo = Object.values(childData);
+      }
     });
-    console.log(reviewRef);
+    //eslint-disable-next-line
   }, [childKey]);
 
   return (
     <>
-      {items?.map(
+      {hawkerInfo.map(
         ({
           DishName,
           imageLink,
@@ -93,4 +93,4 @@ const Posts = () => {
     </>
   );
 };
-export default Posts;
+export default IndividualReviews;
