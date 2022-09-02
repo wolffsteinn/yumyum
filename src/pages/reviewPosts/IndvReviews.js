@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { database } from "./Firebase";
+import { database } from "../../Firebase";
 import { useEffect } from "react";
 import {
   Typography,

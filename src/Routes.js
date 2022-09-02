@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import { ref as databaseRef } from "firebase/database";
 import { database } from "./Firebase";
 import ReviewFeed from "./pages/Posts";
-import IndividualReviews from "./IndvReviews";
+import IndividualReviews from "./pages/reviewPosts/IndvReviews";
 import axios from "axios";
 import hawkerDetails from "./PlaceDetails/hawker-details";
 import hawkerData from "./hawker-centres-kml.json";
