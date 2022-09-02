@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-// import { RemoveScroll } from "react-remove-scroll";
 import ReviewForm from "./pages/reviewForm/review-form";
 import MapView from "./pages/map/mapView";
 import SignUp from "./LoginSignup/Signup";
