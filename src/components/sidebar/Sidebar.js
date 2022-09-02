@@ -5,7 +5,6 @@ import {
   StyledLinkContainer,
   StyledLinkIcon,
   StyledLinkLabel,
-  StyledLinkNotif,
   StyledPerson,
   StyledSidebar,
   StyledSideBarButton,
@@ -47,7 +46,7 @@ const Sidebar = () => {
       </StyledPerson>
 
       <StyledSidebarDivider />
-      {linksArray.map(({ icon, label, notif, to }) => (
+      {linksArray.map(({ icon, label, to }) => (
         <StyledLinkContainer key={label}>
           <StyledLink
             to={to}
@@ -58,8 +57,6 @@ const Sidebar = () => {
             {sidebarOpen && (
               <>
                 <StyledLinkLabel>{label}</StyledLinkLabel>
-                {/* if notifications are at 0 or null, do not display */}
-                {!!notif && <StyledLinkNotif>{notif}</StyledLinkNotif>}
               </>
             )}
           </StyledLink>
