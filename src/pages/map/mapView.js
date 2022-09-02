@@ -25,9 +25,6 @@ import compass from "./compass.svg";
 
 import { NavLink } from "react-router-dom";
 
-let hawkerStringNoSpace;
-let hawkerStringNoSpace2;
-
 const heart =
   "https://www.freeiconspng.com/thumbs/heart-icon/heart-icon-14.png";
 
@@ -64,13 +61,6 @@ export default function Map() {
     mapRef.current = map;
   }, []);
 
-  if (selected != null) {
-    // const hawkerString = JSON.stringify(selected.ADDRESSPOSTALCODE);
-    // hawkerStringNoSpace = hawkerString.replace(/\s+"/g, "");
-    // hawkerStringNoSpace2 = hawkerStringNoSpace.replaceAll('^"|"$', "");
-    // console.log(hawkerString);
-  }
-
   if (loadError) return "Error loading map";
   if (!isLoaded) return "Loading Maps";
 
@@ -100,9 +90,6 @@ export default function Map() {
               }}
               onClick={() => {
                 setSelected(item);
-                console.log(setSelected);
-                console.log(selected);
-                console.log(item);
               }}
             />
           );
@@ -179,7 +166,7 @@ function Search({ panTo }) {
       const { lat, lng } = await getLatLng(results[0]);
       panTo({ lat, lng });
     } catch (error) {
-      console.log("😱 Error: ", error);
+      alert("😱 Error: ", error);
     }
   };
 

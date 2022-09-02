@@ -7,7 +7,6 @@ export const StyledSidebar = styled.div`
   background: ${({ theme }) => theme.background};
   height: 100vh;
   padding: ${view.lgSpacing};
-
   position: relative;
 `;
 

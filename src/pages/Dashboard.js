@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
-import axios from "axios";
-import HawkerDetails from "../PlaceDetails/hawker-details";
-
+import HawkerDetails from "./PlaceDetails/hawker-details";
+import hawkerData from "../hawker-centres-kml.json";
 import { Autocomplete, TextField } from "@mui/material";
 let hawkerNames = [];
 
 const List = () => {
   const [hawkerDetails, setHawkerDetails] = useState([]);
-  const [hawkerName, setHawkerName] = useState([]);
-
-  console.log({ hawkerName, hawkerDetails });
+  const [selectedHawkerName, setSelectedHawkerName] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(
-        "https://data.gov.sg/api/action/datastore_search?resource_id=b80cb643-a732-480d-86b5-e03957bc82aa"
-      )
-      .then((response) => setHawkerDetails(response.data.result.records))
-      .catch((err) => console.log(err));
+    setHawkerDetails(hawkerData);
   }, []);
 
   hawkerNames = hawkerDetails.map((hawkerName) => {
-    const hawkerNameList = hawkerName.name;
+    const hawkerNameList = hawkerName.Name;
     return hawkerNameList;
   });
 
@@ -39,14 +31,14 @@ const List = () => {
             placeholder="Hawker Center Name"
           />
         )}
-        onChange={(e, newValue) => setHawkerName(newValue)}
-        value={hawkerName}
+        onChange={(e, newValue) => setSelectedHawkerName(newValue)}
+        value={selectedHawkerName}
       />
 
       <Grid>
         {hawkerDetails?.map((details, i) => {
-          return hawkerName === details.name ? (
-            <HawkerDetails details={details} />
+          return selectedHawkerName === details.Name ? (
+            <HawkerDetails key={i} details={details} />
           ) : (
             <></>
           );
