@@ -32,7 +32,7 @@ const HawkerDetails = ({ details }) => {
       <CardActions>
         <Button variant="outlined" size="small">
           <NavLink to={`/posts/${details.ADDRESSPOSTALCODE}`}>
-            View Reviews
+            View Related Reviews
           </NavLink>
         </Button>
       </CardActions>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { database } from "../../Firebase";
-import { useEffect } from "react";
 import {
   Typography,
   Stack,
@@ -11,29 +11,20 @@ import {
   CardContent,
   Divider,
 } from "@mui/material";
-import { onChildAdded, ref as databaseRef } from "firebase/database";
-const REVIEW_FOLDER_NAME = "review";
-let hawkerNameList = [];
-let hawkerCenterInfo = [];
+import { onValue, ref as databaseRef } from "firebase/database";
 
 const Posts = () => {
-  const [childData, setChildData] = useState([]);
+  let childData = [];
 
-  useEffect(() => {
-    const reviewRef = databaseRef(database, REVIEW_FOLDER_NAME);
-
-    onChildAdded(reviewRef, (data) => {
-      hawkerNameList.push(data.key);
-      hawkerCenterInfo.push(data.val());
-    });
-
-    for (let i in hawkerCenterInfo) {
-      for (let j in hawkerCenterInfo[i]) {
-        setChildData((childData) => [...childData, hawkerCenterInfo[i][j]]);
+  const readingDatabaseRef = databaseRef(database, "/review");
+  onValue(readingDatabaseRef, (snapshot) => {
+    const data = snapshot.val();
+    for (let i in data) {
+      for (let j in data[i]) {
+        childData.push(data[i][j]);
       }
     }
-    //eslint-disable-next-line
-  }, []);
+  });
 
   return (
     <>
@@ -47,7 +38,7 @@ const Posts = () => {
           satisfactionRating,
           valueRating,
         }) => (
-          <Card key={imageLink} sx={{ maxWidth: 500, marginBottom: 3 }}>
+          <Card key={uuidv4()} sx={{ maxWidth: 500, marginBottom: 3 }}>
             <CardMedia
               component="img"
               height="300"

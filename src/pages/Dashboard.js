@@ -13,6 +13,8 @@ const List = () => {
     setHawkerDetails(hawkerData);
   }, []);
 
+  console.log(hawkerData);
+
   hawkerNames = hawkerDetails.map((hawkerName) => {
     const hawkerNameList = hawkerName.Name;
     return hawkerNameList;
@@ -27,7 +29,7 @@ const List = () => {
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Hawker Name"
+            label="Find your desired hawker center here!"
             placeholder="Hawker Center Name"
           />
         )}

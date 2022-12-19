@@ -7,6 +7,9 @@ import {
   Stack,
   TextField,
   Typography,
+  Dialog,
+  DialogContent,
+  DialogContentText,
 } from "@mui/material";
 import FaceIcon from "@mui/icons-material/Face";
 import { pink } from "@mui/material/colors";
@@ -16,7 +19,7 @@ import {
   StyledPaper,
   StyledTextField,
 } from "./styles-review";
-import { database, storage } from "../../Firebase";
+import SimpleDialogDemo, { database, storage } from "../../Firebase";
 import { ref, push, set } from "firebase/database";
 import {
   getDownloadURL,
@@ -30,6 +33,7 @@ let postingRef = {};
 let hawkerList = [];
 
 const ReviewForm = () => {
+  const [open, setOpen] = useState(false);
   const [valueRating, setValueRating] = useState(2.5);
   const [satisfactionRating, setSatisfactionRating] = useState(2.5);
   const [fileInputFile, setFileInputFile] = useState(null);
@@ -45,6 +49,14 @@ const ReviewForm = () => {
     const names = hawkers.Name;
     return names;
   });
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleValueRatingChange = (e) => {
     e.preventDefault();
@@ -184,12 +196,24 @@ const ReviewForm = () => {
                 />
               </Stack>
             </Box>
-            <StyledButton type="submit" variant="contained" color="secondary">
+            <StyledButton
+              type="submit"
+              variant="contained"
+              color="secondary"
+              onClick={handleClickOpen}
+            >
               Submit
             </StyledButton>
           </form>
         </StyledPaper>
       </Grid>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Posted!
+          </DialogContentText>
+        </DialogContent>
+      </Dialog>
     </Grid>
   );
 };

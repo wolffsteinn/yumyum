@@ -95,7 +95,7 @@ const linksArray = [
     notif: 0,
   },
   {
-    label: "Posts",
+    label: "All Posts",
     icon: <AiOutlineHome />,
     to: "/posts",
     notif: 0,
